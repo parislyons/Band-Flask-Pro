@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block body %}
+<body>
+    <h1>This is your band, add your song.</h1>
+    <p>
+        <div class='form'>
+            <form method='POST' action=''>
+                <!-- hidden_tag() is required for form validation -->
+                {{ form.hidden_tag() }}
+                <!-- Each field displays its label followed by the input field itself -->
+                {{ form.song_name.label }} {{ form.song_name }}
+                <br>
+                {{ form.song_length.label }} {{ form.song_length }}
+                <br>
+                <!-- form.submit is a button -->
+                {{ form.submit }}
+                <br>
+            </form>
+        </div>
+    </p>
+</body>
+{% endblock body %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block body %}
+<body>
+    <h1>This is your band, add your albums.</h1>
+    <p>
+        <div class='form'>
+            <form method='POST' action=''>
+                <!-- hidden_tag() is required for form validation -->
+                {{ form.hidden_tag() }}
+                <!-- Each field displays its label followed by the input field itself -->
+                {{ form.album_name.label }} {{ form.album_name }}
+                <br>
+                {{ form.release_year.label }} {{ form.release_year }}
+                <br>
+                <!-- form.submit is a button -->
+                {{ form.submit }}
+                <br>
+            </form>
+        </div>
+    </p>
+</body>
+{% endblock body %}
