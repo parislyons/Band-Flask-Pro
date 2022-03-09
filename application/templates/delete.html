@@ -1,18 +1,14 @@
 {% extends 'base.html' %}
 {% block body %}
 <body>
-    <h1>This is your band, edit your song.</h1>
+    <h1>This is your band, delete your album.</h1>
     <p>
         <div class='form'>
             <form method='POST' action=''>
                 <!-- hidden_tag() is required for form validation -->
                 {{ form.hidden_tag() }}
                 <!-- Each field displays its label followed by the input field itself -->
-                {{ form.song_id.label }} {{ form.song_id }}
-                <br>
-                {{ form.new_song_name.label }} {{ form.new_song_name }}
-                <br>
-                {{ form.new_song_length.label }} {{ form.new_song_length }}
+                {{ form.album_id.label }} {{ form.album_id }}
                 <br>
                 <!-- form.submit is a button -->
                 {{ form.submit }}

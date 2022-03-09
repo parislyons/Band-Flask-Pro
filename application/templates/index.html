@@ -1,7 +1,22 @@
 {% extends 'base.html' %}
 {% block body %}
-
-This is my band, these are our albums.
-
-
+<body>
+    <h2>This is my band, these are our albums.</h2>
+    <p>
+        <!-- Lists all the albums with the songs under each -->
+        {% for album in albums %}
+            <h3>{{ album.album_name }} ({{ album.release_year }})</h3>
+            {% for listing in listings %}
+                {% if listing.album_id == album.id %}
+                    {% for song in songs %}
+                    {% if listing.song_id == song.id %}
+                        {{ song.song_name }} - {{ song.song_length }}
+                    {% endif %}
+                {% endfor %}
+                <br>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </p>
+</body>
 {% endblock body %}

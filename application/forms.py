@@ -14,6 +14,16 @@ class AddSong(FlaskForm):
     submit = SubmitField('Add Song')
 
 class AddSongToAlbum(FlaskForm):
-    song_id = SelectField('Song Name', choices=[])
-    album_id = SelectField('Album Name', choices=[])
+    song_id = SelectField('Pick Song', choices=[])
+    album_id = SelectField('Pick Album', choices=[])
     submit = SubmitField('Add Song to Album')
+
+class DeleteAlbum(FlaskForm):
+    album_id = SelectField('Pick Album', choices=[])
+    submit = SubmitField('Delete Album')
+
+class EditSong(FlaskForm):
+    song_id = SelectField('Pick Song', choices=[])
+    new_song_name = StringField('Song Name', validators=[DataRequired(), Length(min=2,max=30)]) 
+    new_song_length = StringField('Song Length', validators=[DataRequired(), Length(min=4,max=5)])
+    submit = SubmitField('Edit Song')
