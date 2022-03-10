@@ -1,13 +1,14 @@
 #!/bin/bash
 echo "Updating packages"
 sudo apt-get update
-echo "installing Python"
-sudo apt install -y python3
-echo "installing pip"
-sudo apt install -y python3-pip
-echo "creating virtual environment"
-sudo apt install -y python3.8-venv
-python3 -m venv .venv
-source .venv/bin/activate
-echo "installing project requirements"
-pip install -r requirements.txt
+echo "Install docker" 
+sudo apt-get install curl -y
+curl https://get.docker.com | sudo bash
+sudo usermod -aG docker jenkins
+echo "Install docker compose"
+sudo apt-get install curl -y jq
+version=$(curl -s https://api.github.com/repos/docker/compose/releases/latest | jq -r '.tag_name')
+sudo curl -L "https://github.com/docker/compose/releases/download/${version}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+echo "Docker login"
+docker login -u $DOCKER_HUB_CREDS_USR --password $DOCKER_HUB_CREDS_PSW

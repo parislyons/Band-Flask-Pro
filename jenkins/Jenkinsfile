@@ -5,6 +5,7 @@ pipeline {
     RUN_APP = "true"
     DATABASE_URI = credentials("DATABASE_URI")
     SECRET_KEY = credentials("SECRET_KEY")
+    DOCKER_HUB_CREDS = credentials("DOCKER_HUB_CREDS")
   }
   stages {
     stage('Setup') {
@@ -24,6 +25,16 @@ pipeline {
     stage('Test') {
       steps {
         sh "bash jenkins/test.sh"
+      }
+    }
+    stage('Build') {
+      steps {
+        sh "bash jenkins/build.sh"
+      }
+    }
+    stage('Push') {
+      steps {
+        sh "bash jenkins/push.sh"
       }
     }
     stage('Deploy') {

@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  flaskapp:
+    build: ./flaskapp
+    image: ${DOCKER_HUB_CREDS_USR}/Band-Flask-Pro:latest
+    container_name: Band-Flask-Pro
+    environment:
+      DATABASE_URI:
+      CREATE_SCHEMA:
+    ports:
+    - target: 5000
+      published: 80
