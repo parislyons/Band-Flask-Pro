@@ -7,14 +7,14 @@ services:
     image: ${DOCKER_HUB_CREDS_USR}/band-flask-pro:latest
     container_name: band-flask-pro
     environment:
-      DATABASE_URI: mysql+pymysql://root:${MYSQL_ROOT_PASSWORD}@band-flask-pro-db:3306/bfp
+      DATABASE_URI: mysql+pymysql://root:${MYSQL_ROOT_PASSWORD}@band-flask-pro_database:3306/bfp
       CREATE_SCHEMA:
       SECRET_KEY:
     ports:
     - target: 5000
       published: 80
   database:
-    container_name: band-flask-pro-db
+    container_name: band-flask-pro_database
     image: mysql:5.7
     environment:
       MYSQL_ROOT_PASSWORD:
