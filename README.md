@@ -92,6 +92,8 @@ Tests were written using pytest and run automatically using Jenkins. When Jenkin
 
 ### Scope
 
+[![Risk Screen Shot][risk-assessment]]
+
 This project was subject to limitations which restricted what could be achieved, using the MoSCoW prioritisation I considered the following points:
 
 Must Have:
@@ -145,3 +147,4 @@ Project Link: [https://github.com/parislyons/Band-Flask-Pro](https://github.com/
 [database]: documentation/ERD.png
 [test-stage]: documentation/TestStage.png
 [cobertura]: documentation/Jenkins.png
+[risk-assessment]: documentation/RiskAssessment.png
