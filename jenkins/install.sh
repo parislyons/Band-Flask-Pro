@@ -1,6 +1,8 @@
 #!/bin/bash
 echo "Updating packages"
 sudo apt-get update
+echo "Installing venv"
+sudo apt-get install python3 python3-pip python3-venv -y
 echo "Install docker" 
 sudo apt-get install curl -y
 curl https://get.docker.com | sudo bash

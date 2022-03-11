@@ -1,12 +1,28 @@
 version: "3.8"
 services:
-  flaskapp:
-    build: ./flaskapp
-    image: ${DOCKER_HUB_CREDS_USR}/Band-Flask-Pro:latest
-    container_name: Band-Flask-Pro
+  band-flask-pro:
+    deploy:
+      replicas: 3
+    build: .
+    image: ${DOCKER_HUB_CREDS_USR}/band-flask-pro:latest
+    container_name: band-flask-pro
     environment:
-      DATABASE_URI:
+      DATABASE_URI: mysql+pymysql://root:${MYSQL_ROOT_PASSWORD}@band-flask-pro_database:3306/bfp
       CREATE_SCHEMA:
+      SECRET_KEY:
     ports:
     - target: 5000
       published: 80
+  database:
+    container_name: band-flask-pro_database
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD:
+      MYSQL_DATABASE: bfp
+    volumes:
+    - type: volume
+      source: database
+      target: /var/lib/mysql
+volumes:
+  database:
+

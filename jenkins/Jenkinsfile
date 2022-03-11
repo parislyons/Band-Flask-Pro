@@ -6,20 +6,12 @@ pipeline {
     DATABASE_URI = credentials("DATABASE_URI")
     SECRET_KEY = credentials("SECRET_KEY")
     DOCKER_HUB_CREDS = credentials("DOCKER_HUB_CREDS")
+    MYSQL_ROOT_PASSWORD = credentials("MYSQL_ROOT_PASSWORD")
   }
   stages {
     stage('Setup') {
       steps {
         sh "bash jenkins/install.sh"
-      }
-    }
-    stage('Create Schema') {
-      steps {
-        script{
-          if (env.CREATE_SCHEMA == "true") {
-            sh "bash jenkins/schema.sh"
-          }
-        }
       }
     }
     stage('Test') {
