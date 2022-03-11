@@ -1,6 +1,8 @@
 version: "3.8"
 services:
   band-flask-pro:
+    deploy:
+      replicas: 3
     build: .
     image: ${DOCKER_HUB_CREDS_USR}/band-flask-pro:latest
     container_name: band-flask-pro
