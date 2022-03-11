@@ -13,15 +13,6 @@ pipeline {
         sh "bash jenkins/install.sh"
       }
     }
-    stage('Create Schema') {
-      steps {
-        script{
-          if (env.CREATE_SCHEMA == "true") {
-            sh "bash jenkins/schema.sh"
-          }
-        }
-      }
-    }
     stage('Test') {
       steps {
         sh "bash jenkins/test.sh"
