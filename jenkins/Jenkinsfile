@@ -1,0 +1,49 @@
+pipeline {
+  agent any
+  environment {
+    CREATE_SCHEMA = "true"
+    RUN_APP = "true"
+    DATABASE_URI = credentials("DATABASE_URI")
+    SECRET_KEY = credentials("SECRET_KEY")
+    DOCKER_HUB_CREDS = credentials("DOCKER_HUB_CREDS")
+    MYSQL_ROOT_PASSWORD = credentials("MYSQL_ROOT_PASSWORD")
+  }
+  stages {
+    stage('Setup') {
+      steps {
+        sh "bash jenkins/install.sh"
+      }
+    }
+    stage('Test') {
+      steps {
+        sh "bash jenkins/test.sh"
+      }
+    }
+    stage('Build') {
+      steps {
+        sh "bash jenkins/build.sh"
+      }
+    }
+    stage('Push') {
+      steps {
+        sh "bash jenkins/push.sh"
+      }
+    }
+    stage('Deploy') {
+      steps {
+        script{
+          if (env.RUN_APP == "true") {
+            sh "bash jenkins/deploy.sh"
+          }
+        }
+      }
+    }
+  }
+  post {
+    always {
+      junit 'junit_report.xml'
+      cobertura autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: 'coverage.xml', conditionalCoverageTargets: '70, 0, 0', failUnhealthy: false, failUnstable: false, lineCoverageTargets: '80, 0, 0', maxNumberOfBuilds: 0, methodCoverageTargets: '80, 0, 0', onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false
+      archiveArtifacts artifacts: '*.xml', followSymlinks: false
+    }
+  }
+}
